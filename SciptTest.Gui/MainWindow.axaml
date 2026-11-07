@@ -1,0 +1,59 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="ScriptTest.Gui.MainWindow"
+        Width="700" Height="650"
+        Title="ScriptTest Simulation">
+
+  <ScrollViewer>
+    <StackPanel Margin="16" Spacing="10">
+
+      <TextBlock FontSize="20" Text="Simulation Settings"/>
+
+      <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="8">
+        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Noise Rate (0-1)"/>
+        <TextBox  Grid.Row="0" Grid.Column="1" Name="NoiseRateBox" Text="0.02"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Mutation Rate (0-1)"/>
+        <TextBox  Grid.Row="1" Grid.Column="1" Name="MutationRateBox" Text="0.01"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Rounds per match (1-1000)"/>
+        <TextBox  Grid.Row="2" Grid.Column="1" Name="RoundsBox" Text="10"/>
+      </Grid>
+
+      <TextBlock Margin="0,12,0,0" FontSize="20" Text="Agent Counts"/>
+
+      <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="8">
+        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Always Cooperate"/>
+        <TextBox  Grid.Row="0" Grid.Column="1" Name="AlwaysCooperateBox" Text="10"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Always Defect"/>
+        <TextBox  Grid.Row="1" Grid.Column="1" Name="AlwaysDefectBox" Text="10"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Tit For Tat"/>
+        <TextBox  Grid.Row="2" Grid.Column="1" Name="TitForTatBox" Text="10"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Text="Tit For Two Tats"/>
+        <TextBox  Grid.Row="3" Grid.Column="1" Name="TitForTwoTatsBox" Text="10"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Text="Grim"/>
+        <TextBox  Grid.Row="4" Grid.Column="1" Name="GrimBox" Text="10"/>
+
+        <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Text="Random"/>
+        <TextBox  Grid.Row="5" Grid.Column="1" Name="RandomBox" Text="10"/>
+
+        <TextBlock Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Text="Generous Tit For Tat"/>
+        <TextBox  Grid.Row="6" Grid.Column="1" Name="GenerousTitForTatBox" Text="10"/>
+      </Grid>
+
+      <Button Margin="0,16,0,0" Content="Run Simulation" Click="RunSimulation_Click"/>
+
+      <Border Margin="0,12,0,0" Padding="12" BorderThickness="1">
+        <StackPanel Spacing="6">
+          <TextBlock FontSize="18" Text="Result"/>
+          <TextBlock Name="ResultText" Text="(not run yet)"/>
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</Window>

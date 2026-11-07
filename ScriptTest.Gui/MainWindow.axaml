@@ -1,0 +1,433 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Avalonia;assembly=LiveChartsCore.SkiaSharpView.Avalonia"
+        xmlns:local="clr-namespace:ScriptTest.Gui"
+        x:Class="ScriptTest.Gui.MainWindow"
+        Width="820"
+        Height="760"
+        Title="ScriptTest Simulation">
+
+
+  <!-- GLOBAL STYLES -->
+
+
+  <Window.Styles>
+
+    <Style Selector="TextBlock">
+      <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style Selector="TextBox">
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <Style Selector="Button">
+      <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+  </Window.Styles>
+
+
+  <!--  LAYOUT -->
+
+
+  <Grid>
+
+
+    <Image Source="avares://ScriptTest.Gui/Assets/background.png"
+           Stretch="UniformToFill"
+           IsHitTestVisible="False"
+           ZIndex="-1"/>
+
+
+    <TabControl>
+
+
+      <!-- SIMULATION TAB -->
+  
+
+      <TabItem Header="Simulation"
+                Foreground="White">
+        <ScrollViewer>
+          <StackPanel Margin="22" Spacing="18">
+
+          
+            <Border Background="#CC6a9360"
+                    Padding="16"
+                    CornerRadius="10">
+
+              <StackPanel Spacing="12">
+
+                <TextBlock FontSize="22"
+                           FontWeight="Bold"
+                           Text="Agent Counts"/>
+
+                <Grid ColumnDefinitions="Auto,*"
+                      RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                      ColumnSpacing="14"
+                      RowSpacing="10">
+
+                  <TextBlock Grid.Row="0" Text="Always Cooperate"/>
+                  <TextBox Grid.Row="0" Grid.Column="1" Name="AlwaysCooperateBox"/>
+
+                  <TextBlock Grid.Row="1" Text="Always Defect"/>
+                  <TextBox Grid.Row="1" Grid.Column="1" Name="AlwaysDefectBox"/>
+
+                  <TextBlock Grid.Row="2" Text="Tit For Tat"/>
+                  <TextBox Grid.Row="2" Grid.Column="1" Name="TitForTatBox"/>
+
+                  <TextBlock Grid.Row="3" Text="Tit For Two Tats"/>
+                  <TextBox Grid.Row="3" Grid.Column="1" Name="TitForTwoTatsBox"/>
+
+                  <TextBlock Grid.Row="4" Text="Grim"/>
+                  <TextBox Grid.Row="4" Grid.Column="1" Name="GrimBox"/>
+
+                  <TextBlock Grid.Row="5" Text="Random"/>
+                  <TextBox Grid.Row="5" Grid.Column="1" Name="RandomBox"/>
+
+                  <TextBlock Grid.Row="6" Text="Generous Tit For Tat"/>
+                  <TextBox Grid.Row="6" Grid.Column="1" Name="GenerousTitForTatBox"/>
+
+                </Grid>
+                
+                <Button Content="Set Default Population"
+                        Width="180"
+                        Click="SetDefaultPopulation_Click"/>
+
+              </StackPanel>
+            </Border>
+
+    
+            <Button Content="RUN SIMULATION"
+                    FontSize="20"
+                    Height="40"
+                    Padding="5"
+                    Background="#C62828"
+                    Click="RunSimulation_Click"/>
+
+
+            <Border Background="#CC6a9360"
+                    Padding="16"
+                    CornerRadius="10">
+
+              <StackPanel>
+                <TextBlock FontSize="18"
+                           FontWeight="Bold"
+                           Text="Results"/>
+                <TextBlock Name="ResultText"
+                           Text="(not run yet)"/>
+              </StackPanel>
+
+            </Border>
+
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+
+      <!-- SETTINGS TAB -->
+
+
+      <TabItem Header="Settings"
+              Foreground="White">
+        <ScrollViewer>
+          <StackPanel Margin="22" Spacing="18">
+
+
+            <Border Background="#CC6a9360"
+                    Padding="20"
+                    CornerRadius="10">
+
+              <StackPanel Spacing="12">
+
+                <TextBlock FontSize="22"
+                           FontWeight="Bold"
+                           Text="Simulation Settings"/>
+
+                <Grid ColumnDefinitions="Auto,*"
+                      RowDefinitions="Auto,Auto,Auto"
+                      ColumnSpacing="14"
+                      RowSpacing="10">
+
+                  <TextBlock Text="Noise Rate"/>
+                  <TextBox Grid.Column="1" Name="NoiseRateBox"/>
+
+                  <TextBlock Grid.Row="1" Text="Mutation Rate"/>
+                  <TextBox Grid.Row="1" Grid.Column="1" Name="MutationRateBox"/>
+
+                  <TextBlock Grid.Row="2" Text="Rounds Per Match"/>
+                  <TextBox Grid.Row="2" Grid.Column="1" Name="RoundsBox"/>
+
+                </Grid>
+
+                <Button Content="Set Default Simulation Settings"
+                        Width="260"
+                        Click="SetDefaultSimulation_Click"/>
+
+              </StackPanel>
+            </Border>
+
+
+            <Border Background="#CC6a9360"
+                    Padding="16"
+                    CornerRadius="10">
+
+              <StackPanel Spacing="12">
+
+                <TextBlock FontSize="22"
+                          FontWeight="Bold"
+                          Text="Payoff Matrix"
+                          HorizontalAlignment="Left"/>
+
+                <!-- 3x3 Grid -->
+                <Grid ColumnDefinitions="2*,3*,3*"
+                      RowDefinitions="Auto,Auto,Auto"
+                      ColumnSpacing="18"
+                      RowSpacing="14"
+                      HorizontalAlignment="Left">
+
+   
+                  <TextBlock Grid.Row="0" Grid.Column="1"
+                            Text="Opponent Cooperates"
+                            HorizontalAlignment="Stretch"/>
+
+                  <TextBlock Grid.Row="0" Grid.Column="2"
+                            Text="    Opponent Defects    "
+                            HorizontalAlignment="Stretch"/>
+
+       
+                  <TextBlock Grid.Row="1" Grid.Column="0"
+                            Text="You Cooperate"
+                            VerticalAlignment="Center"/>
+
+                  <TextBlock Grid.Row="2" Grid.Column="0"
+                            Text="You Defect"
+                            VerticalAlignment="Center"/>
+
+        
+                  <TextBox Grid.Row="1" Grid.Column="1"
+                          Name="CCBox"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Center"
+                          Padding="6"/>
+
+                  <TextBox Grid.Row="1" Grid.Column="2"
+                          Name="CDBox"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Center"
+                          Padding="6"/>
+
+                  <TextBox Grid.Row="2" Grid.Column="1"
+                          Name="DCBox"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Center"
+                          Padding="6"/>
+
+                  <TextBox Grid.Row="2" Grid.Column="2"
+                          Name="DDBox"
+                          HorizontalAlignment="Stretch"
+                          HorizontalContentAlignment="Center"
+                          Padding="6"/>
+
+
+                </Grid>
+
+                <Button Content="Set Default Payoffs"
+                        Width="180"
+                        HorizontalAlignment="Left"
+                        Click="ResetPayoffs_Click"/>
+
+              </StackPanel>
+            </Border>
+
+
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+  
+      <!-- HISTORY TAB -->
+
+
+      <TabItem Header="History"
+                Foreground="White">
+        <ScrollViewer>
+          <StackPanel Margin="22" Spacing="10">
+
+            <Button Content="Refresh History"
+                    Width="150"
+                    Click="RefreshHistory_Click"/>
+
+            <ListBox x:Name="HistoryList"
+                    Background="#CC6a9360"
+                    CornerRadius="10"
+                    Height="520">
+
+              <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="local:HistoryRunView">
+                  <Border Margin="6"
+                          Padding="10"
+                          CornerRadius="10">
+
+                    <StackPanel Spacing="4">
+
+                      <TextBlock FontWeight="Bold"
+                                Text="{Binding Title}"/>
+
+                      <TextBlock Text="{Binding WinnerLine}"/>
+
+                      <TextBlock Text="{Binding GenerationLine}"/>
+
+                    </StackPanel>
+
+                  </Border>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+
+            </ListBox>
+
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+
+
+      <!-- GRAPH TAB -->
+      
+
+      <TabItem Header="Graph"
+                Foreground="White">
+        <StackPanel Margin="22" Spacing="10">
+
+          <Button Content="Plot Graph"
+                  Click="PlotDynamics_Click"/>
+
+          <Border CornerRadius="10"
+                  Background="White"
+                  Padding="10">
+
+              <lvc:CartesianChart x:Name="DynamicsChart"
+                                  Height="450"/>
+
+          </Border>
+
+
+        </StackPanel>
+      </TabItem>
+
+  
+<!-- THEORY / EXPLANATION TAB -->
+
+
+      <TabItem Header="How It Works"
+                Foreground="White">
+        <ScrollViewer>
+          <StackPanel Margin="22" Spacing="18">
+
+            <!-- INTORDUCTION -->
+            <Border Background="#CC6a9360"
+                    Padding="18"
+                    CornerRadius="10">
+
+              <StackPanel Spacing="8">
+                <TextBlock FontSize="22"
+                          FontWeight="Bold"
+                          Text="How the Simulation Works"/>
+
+                <TextBlock TextWrapping="Wrap"
+                          Text="This program simulates an evolutionary version of the Prisoner's Dilemma. Agents repeatedly play against each other, earn scores, and the most successful strategies reproduce over generations."/>
+              </StackPanel>
+            </Border>
+
+            <!-- STRATS -->
+            <Border Background="#CC6a9360"
+                    Padding="18"
+                    CornerRadius="10">
+
+              <StackPanel Spacing="8">
+
+                <TextBlock FontSize="20"
+                          FontWeight="Bold"
+                          Text="Strategies"/>
+
+                <TextBlock TextWrapping="Wrap"
+                          Text="Tit For Tat – Cooperates on the first move, then copies the opponent's previous action."/>
+
+                <TextBlock TextWrapping="Wrap"
+                          Text="Grim – Cooperates until betrayed once, then defects forever."/>
+
+                <TextBlock TextWrapping="Wrap"
+                          Text="Generous Tit For Tat – Like Tit For Tat, but occasionally forgives defections."/>
+
+                <TextBlock TextWrapping="Wrap"
+                          Text="Always Cooperate – Always cooperates."/>
+
+                <TextBlock TextWrapping="Wrap"
+                          Text="Always Defect – Always defects."/>
+
+                <TextBlock TextWrapping="Wrap"
+                          Text="Random – Chooses randomly each round."/>
+
+                <TextBlock TextWrapping="Wrap"
+                          Text="Two Tit For Tats – Like Tit For Tat, but takes two tat actions before defecting."/>
+
+              </StackPanel>
+            </Border>
+
+            <!-- NOISE -->
+            <Border Background="#CC6a9360"
+                    Padding="18"
+                    CornerRadius="10">
+
+              <StackPanel Spacing="8">
+
+                <TextBlock FontSize="20"
+                          FontWeight="Bold"
+                          Text="Noise"/>
+
+                <TextBlock TextWrapping="Wrap"
+                          Text="Noise represents mistakes in decision making. With some probability, an agent's intended move is flipped. High noise makes cooperation harder to maintain."/>
+              </StackPanel>
+            </Border>
+
+            <!-- MUTATION -->
+            <Border Background="#CC6a9360"
+                    Padding="18"
+                    CornerRadius="10">
+
+              <StackPanel Spacing="8">
+
+                <TextBlock FontSize="20"
+                          FontWeight="Bold"
+                          Text="Mutation"/>
+
+                <TextBlock TextWrapping="Wrap"
+                          Text="Mutation is the chance that a new agent adopts a different strategy when reproducing. This introduces variation and prevents the system from becoming stuck permanently."/>
+              </StackPanel>
+            </Border>
+
+            <!-- GRAPH -->
+            <Border Background="#CC6a9360"
+                    Padding="18"
+                    CornerRadius="10">
+
+              <StackPanel Spacing="8">
+
+                <TextBlock FontSize="20"
+                          FontWeight="Bold"
+                          Text="Understanding the Graph"/>
+
+                <TextBlock TextWrapping="Wrap"
+                          Text="Each line represents how many agents are using a strategy over time. The x-axis shows generations and the y-axis shows population size. Strategies that reach zero have gone extinct."/>
+              </StackPanel>
+            </Border>
+
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+
+    </TabControl>
+  </Grid>
+</Window>

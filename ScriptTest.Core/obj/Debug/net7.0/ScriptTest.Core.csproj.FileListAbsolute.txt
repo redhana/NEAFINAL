@@ -1,0 +1,12 @@
+/Users/joyeade/NEAFINAL/ScriptTest.Core/bin/Debug/net7.0/ScriptTest.Core.deps.json
+/Users/joyeade/NEAFINAL/ScriptTest.Core/bin/Debug/net7.0/ScriptTest.Core.dll
+/Users/joyeade/NEAFINAL/ScriptTest.Core/bin/Debug/net7.0/ScriptTest.Core.pdb
+/Users/joyeade/NEAFINAL/ScriptTest.Core/obj/Debug/net7.0/ScriptTest.Core.csproj.AssemblyReference.cache
+/Users/joyeade/NEAFINAL/ScriptTest.Core/obj/Debug/net7.0/ScriptTest.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/joyeade/NEAFINAL/ScriptTest.Core/obj/Debug/net7.0/ScriptTest.Core.AssemblyInfoInputs.cache
+/Users/joyeade/NEAFINAL/ScriptTest.Core/obj/Debug/net7.0/ScriptTest.Core.AssemblyInfo.cs
+/Users/joyeade/NEAFINAL/ScriptTest.Core/obj/Debug/net7.0/ScriptTest.Core.csproj.CoreCompileInputs.cache
+/Users/joyeade/NEAFINAL/ScriptTest.Core/obj/Debug/net7.0/ScriptTest.Core.dll
+/Users/joyeade/NEAFINAL/ScriptTest.Core/obj/Debug/net7.0/refint/ScriptTest.Core.dll
+/Users/joyeade/NEAFINAL/ScriptTest.Core/obj/Debug/net7.0/ScriptTest.Core.pdb
+/Users/joyeade/NEAFINAL/ScriptTest.Core/obj/Debug/net7.0/ref/ScriptTest.Core.dll
